@@ -6,7 +6,7 @@
 
 import { useEffect, useRef } from 'react';
 
-export const usePreviewScroll = (fieldId: string, value: any, isFocused: boolean) => {
+export const usePreviewScroll = (fieldId: string, _value: any, isFocused: boolean) => {
   const timeoutRef = useRef<number | undefined>(undefined);
   const lastScrolledFieldRef = useRef<string>('');
   const isScrollingRef = useRef(false);
