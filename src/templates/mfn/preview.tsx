@@ -276,46 +276,51 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
           Aldus overeengekomen en in <strong>{data.aantalExemplaren || '3'}-voud</strong> opgemaakt en ondertekend te {getValue(data.ondertekenPlaats, 'plaats')} op {data.ondertekenDatum ? formatDateLong(data.ondertekenDatum) : '[datum]'}.
         </p>
 
-        <div style={{ marginTop: '48px', display: 'flex', justifyContent: 'space-between', gap: '20px' }}>
-          {/* Mediator */}
-          <div style={{ flex: 1, minWidth: '150px' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Mediator</p>
-            {data.mediatorOrganisatie && (
-              <p style={{ fontSize: '11px', fontStyle: 'italic', marginBottom: '8px' }}>
-                {data.mediatorOrganisatie}
-              </p>
-            )}
-            <div style={{ borderTop: '1px solid #000', paddingTop: '8px', marginTop: data.mediatorOrganisatie ? '8px' : '44px' }}>
-              <p style={{ fontSize: '12px' }}>{getValue(data.mediatorNaam, 'naam')}</p>
-            </div>
-          </div>
+        {/* Handtekening tabel met 3 kolommen */}
+        <table style={{ width: '100%', marginTop: '48px', borderCollapse: 'collapse' }}>
+          <tbody>
+            <tr>
+              {/* Kolom 1: Mediator */}
+              <td style={{ width: '33%', verticalAlign: 'top', paddingRight: '16px' }}>
+                <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Mediator</p>
+                {data.mediatorOrganisatie && (
+                  <p style={{ fontSize: '11px', fontStyle: 'italic', marginBottom: '8px' }}>
+                    {data.mediatorOrganisatie}
+                  </p>
+                )}
+                <div style={{ borderTop: '1px solid #000', paddingTop: '8px', marginTop: data.mediatorOrganisatie ? '8px' : '44px' }}>
+                  <p style={{ fontSize: '12px' }}>{getValue(data.mediatorNaam, 'naam')}</p>
+                </div>
+              </td>
 
-          {/* Deelnemer 1 */}
-          <div style={{ flex: 1, minWidth: '150px' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>{getValue(data.partij1Naam, 'Deelnemer 1')}</p>
-            {data.partij1Vertegenwoordiger && (
-              <p style={{ fontSize: '11px', fontStyle: 'italic', marginBottom: '8px' }}>
-                (vertegenwoordigd door: {data.partij1Vertegenwoordiger})
-              </p>
-            )}
-            <div style={{ borderTop: '1px solid #000', paddingTop: '8px', marginTop: data.partij1Vertegenwoordiger ? '8px' : '44px' }}>
-              <p style={{ fontSize: '12px' }}>&nbsp;</p>
-            </div>
-          </div>
+              {/* Kolom 2: Deelnemer 1 */}
+              <td style={{ width: '33%', verticalAlign: 'top', paddingLeft: '8px', paddingRight: '8px' }}>
+                <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>{getValue(data.partij1Naam, 'Deelnemer 1')}</p>
+                {data.partij1Vertegenwoordiger && (
+                  <p style={{ fontSize: '11px', fontStyle: 'italic', marginBottom: '8px' }}>
+                    (vertegenwoordigd door: {data.partij1Vertegenwoordiger})
+                  </p>
+                )}
+                <div style={{ borderTop: '1px solid #000', paddingTop: '8px', marginTop: data.partij1Vertegenwoordiger ? '8px' : '44px' }}>
+                  <p style={{ fontSize: '12px' }}>&nbsp;</p>
+                </div>
+              </td>
 
-          {/* Deelnemer 2 */}
-          <div style={{ flex: 1, minWidth: '150px' }}>
-            <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>{getValue(data.partij2Naam, 'Deelnemer 2')}</p>
-            {data.partij2Vertegenwoordiger && (
-              <p style={{ fontSize: '11px', fontStyle: 'italic', marginBottom: '8px' }}>
-                (vertegenwoordigd door: {data.partij2Vertegenwoordiger})
-              </p>
-            )}
-            <div style={{ borderTop: '1px solid #000', paddingTop: '8px', marginTop: data.partij2Vertegenwoordiger ? '8px' : '44px' }}>
-              <p style={{ fontSize: '12px' }}>&nbsp;</p>
-            </div>
-          </div>
-        </div>
+              {/* Kolom 3: Deelnemer 2 */}
+              <td style={{ width: '33%', verticalAlign: 'top', paddingLeft: '16px' }}>
+                <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>{getValue(data.partij2Naam, 'Deelnemer 2')}</p>
+                {data.partij2Vertegenwoordiger && (
+                  <p style={{ fontSize: '11px', fontStyle: 'italic', marginBottom: '8px' }}>
+                    (vertegenwoordigd door: {data.partij2Vertegenwoordiger})
+                  </p>
+                )}
+                <div style={{ borderTop: '1px solid #000', paddingTop: '8px', marginTop: data.partij2Vertegenwoordiger ? '8px' : '44px' }}>
+                  <p style={{ fontSize: '12px' }}>&nbsp;</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

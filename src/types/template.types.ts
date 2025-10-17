@@ -22,7 +22,7 @@ export interface TemplateMetadata {
 export interface TemplateField {
   id: string;
   label: string;
-  type: 'text' | 'date' | 'select' | 'textarea' | 'number' | 'radio' | 'checkbox';
+  type: 'text' | 'date' | 'select' | 'multiselect' | 'textarea' | 'number' | 'radio' | 'checkbox';
   placeholder?: string;
   options?: Array<{ value: string; label: string }>;
   defaultValue?: any;

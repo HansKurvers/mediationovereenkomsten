@@ -6,6 +6,8 @@
 import { TemplateConfig } from '../types/template.types';
 import { mfnConfig } from './mfn/config';
 import { MfnPreview } from './mfn/preview';
+import { adrConfig } from './adr/config';
+import { AdrPreview } from './adr/preview';
 
 export interface RegisteredTemplate {
   config: TemplateConfig;
@@ -17,9 +19,12 @@ export const templateRegistry: Record<string, RegisteredTemplate> = {
     config: mfnConfig,
     PreviewComponent: MfnPreview,
   },
+  adr: {
+    config: adrConfig,
+    PreviewComponent: AdrPreview,
+  },
   // Future templates can be added here:
   // vfas: { config: vfasConfig, PreviewComponent: VfasPreview },
-  // adr: { config: adrConfig, PreviewComponent: AdrPreview },
 };
 
 export const getTemplate = (templateId: string): RegisteredTemplate | undefined => {

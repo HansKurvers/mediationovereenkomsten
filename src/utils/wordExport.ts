@@ -71,6 +71,7 @@ export const exportToWord = async (
           font-weight: bold;
           margin-top: 18pt;
           margin-bottom: 12pt;
+          text-decoration: inherit;
         }
 
         /* Paragraphs */

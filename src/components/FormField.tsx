@@ -63,6 +63,34 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
         defaultValue={field.defaultValue || ''}
         render={({ field: controllerField }) => {
           switch (field.type) {
+            case 'multiselect':
+              // Multi-select dropdown or checkbox group
+              const currentMultiValues = Array.isArray(controllerField.value) ? controllerField.value : [];
+              return (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {field.options?.map((option) => {
+                    const isChecked = currentMultiValues.includes(option.value);
+                    return (
+                      <label key={option.value} style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              controllerField.onChange([...currentMultiValues, option.value]);
+                            } else {
+                              controllerField.onChange(currentMultiValues.filter((v: string) => v !== option.value));
+                            }
+                          }}
+                          style={{ width: '18px', height: '18px', marginRight: '8px', cursor: 'pointer' }}
+                        />
+                        <span style={{ fontSize: '14px' }}>{option.label}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              );
+
             case 'text':
               return (
                 <input
