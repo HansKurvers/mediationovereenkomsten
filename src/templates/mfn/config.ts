@@ -98,6 +98,7 @@ export const mfnConfig: TemplateConfig = {
     name: 'MfN',
     fullName: 'Mediatorsfederatie Nederland',
     description: 'Model mediationovereenkomst volgens MfN-standaard',
+    details: 'Geschikt voor: algemene mediation, arbeidsconflicten, burengeschillen, zakelijke conflicten',
     version: '2023.1',
     organization: 'Mediatorsfederatie Nederland',
     color: '#0EA5E9', // Sky blue

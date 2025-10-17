@@ -117,6 +117,7 @@ export const adrConfig: TemplateConfig = {
     name: 'ADR',
     fullName: 'ADR Mediationovereenkomst',
     description: 'ADR-gecertificeerde mediation met subsidie mogelijkheden',
+    details: 'Geschikt voor: gecertificeerde mediation met mogelijkheid voor subsidie, meldcode huiselijk geweld van toepassing',
     version: '2024.1',
     organization: 'ADR Instituut',
     color: '#10B981', // Green

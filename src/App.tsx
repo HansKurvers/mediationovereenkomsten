@@ -119,7 +119,7 @@ function App() {
           </Card>
 
           {/* Right Panel - Preview */}
-          <div className="bg-gray-200 rounded-lg p-6 shadow max-h-[calc(100vh-240px)] overflow-y-auto">
+          <div className="preview-container bg-gray-200 rounded-lg p-6 shadow max-h-[calc(100vh-240px)] overflow-y-auto scroll-smooth">
             <div className="mb-4">
               <h2 className="text-xl font-bold mb-2">Preview</h2>
               <p className="text-sm text-gray-600">

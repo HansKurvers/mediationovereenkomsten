@@ -134,10 +134,10 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
       </div>
 
       {/* Mediator - dynamische beschrijving */}
-      <div style={{ marginBottom: '24px' }}>
-        <p>{getMediatorBeschrijving(data)}</p>
+      <div style={{ marginBottom: '24px' }} data-field="mediatorNaam">
+        <p data-field="mediatorVfasType">{getMediatorBeschrijving(data)}</p>
         {data.mediatorVfasRegistratie && (
-          <p style={{ marginTop: '8px', fontStyle: 'italic' }}>
+          <p style={{ marginTop: '8px', fontStyle: 'italic' }} data-field="mediatorVfasRegistratie">
             vFAS registratienummer: {data.mediatorVfasRegistratie}
           </p>
         )}
@@ -146,19 +146,19 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
       <p style={{ marginBottom: '24px' }}>en</p>
 
       {/* Deelnemer A */}
-      <div style={{ marginBottom: '16px' }}>
+      <div style={{ marginBottom: '16px' }} data-field="partij1Naam">
         <p>
           <strong>Deelnemer A:</strong> {getValue(data.partij1Naam, 'naam deelnemer A')}
           {data.partij1Type === 'natuurlijk' && data.partij1Geboortedatum && (
-            <>, geboren op {formatDateLong(data.partij1Geboortedatum)}</>
+            <span data-field="partij1Geboortedatum">, geboren op {formatDateLong(data.partij1Geboortedatum)}</span>
           )}
           {data.partij1Type === 'natuurlijk' && data.partij1Geboorteplaats && (
-            <> te {data.partij1Geboorteplaats}</>
+            <span data-field="partij1Geboorteplaats"> te {data.partij1Geboorteplaats}</span>
           )}
-          , {data.partij1Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij1Adres, 'adres')}
+          <span data-field="partij1Adres">, {data.partij1Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij1Adres, 'adres')}</span>
         </p>
         {data.partij1Vertegenwoordiger && (
-          <p style={{ marginLeft: '20px', fontStyle: 'italic' }}>
+          <p style={{ marginLeft: '20px', fontStyle: 'italic' }} data-field="partij1Vertegenwoordiger">
             hier vertegenwoordigd door: {data.partij1Vertegenwoordiger}
           </p>
         )}
@@ -167,19 +167,19 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
       <p style={{ marginBottom: '16px' }}>en</p>
 
       {/* Deelnemer B */}
-      <div style={{ marginBottom: '24px' }}>
+      <div style={{ marginBottom: '24px' }} data-field="partij2Naam">
         <p>
           <strong>Deelnemer B:</strong> {getValue(data.partij2Naam, 'naam deelnemer B')}
           {data.partij2Type === 'natuurlijk' && data.partij2Geboortedatum && (
-            <>, geboren op {formatDateLong(data.partij2Geboortedatum)}</>
+            <span data-field="partij2Geboortedatum">, geboren op {formatDateLong(data.partij2Geboortedatum)}</span>
           )}
           {data.partij2Type === 'natuurlijk' && data.partij2Geboorteplaats && (
-            <> te {data.partij2Geboorteplaats}</>
+            <span data-field="partij2Geboorteplaats"> te {data.partij2Geboorteplaats}</span>
           )}
-          , {data.partij2Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij2Adres, 'adres')}
+          <span data-field="partij2Adres">, {data.partij2Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij2Adres, 'adres')}</span>
         </p>
         {data.partij2Vertegenwoordiger && (
-          <p style={{ marginLeft: '20px', fontStyle: 'italic' }}>
+          <p style={{ marginLeft: '20px', fontStyle: 'italic' }} data-field="partij2Vertegenwoordiger">
             hier vertegenwoordigd door: {data.partij2Vertegenwoordiger}
           </p>
         )}
@@ -189,18 +189,18 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
       <p style={{ marginBottom: '16px', fontWeight: 'bold', textTransform: 'uppercase' }}>Nemen in aanmerking:</p>
 
       <ul style={{ marginBottom: '24px', marginLeft: '40px', listStyleType: 'disc' }}>
-        <li>Dat deelnemers zich tot de {getMediatorTypeNaam(mediatorType)} hebben gewend met het verzoek hen bij te staan bij {getVfasKwestieText(data.kwestieOnderwerpVfas || data.kwestieType, data.kwestieOnderwerpVfasAnders || data.kwestieAndersOmschrijving)};</li>
+        <li data-field="kwestieOnderwerpVfas">Dat deelnemers zich tot de {getMediatorTypeNaam(mediatorType)} hebben gewend met het verzoek hen bij te staan bij {getVfasKwestieText(data.kwestieOnderwerpVfas || data.kwestieType, data.kwestieOnderwerpVfasAnders || data.kwestieAndersOmschrijving)};</li>
         {data.familierecht && (
-          <li>Dat het familierecht betreft;</li>
+          <li data-field="familierecht">Dat het familierecht betreft;</li>
         )}
         {data.ouderschapsplanNodig === 'ja' && (
-          <li>Dat er minderjarige kinderen zijn en dat een ouderschapsplan moet worden opgesteld;</li>
+          <li data-field="ouderschapsplanNodig">Dat er minderjarige kinderen zijn en dat een ouderschapsplan moet worden opgesteld;</li>
         )}
         {data.vfasGedragsregels && (
-          <li>Dat de {getMediatorTypeNaam(mediatorType)} gebonden is aan de Gedragsregels voor Scheidingsmediators van de vFAS;</li>
+          <li data-field="vfasGedragsregels">Dat de {getMediatorTypeNaam(mediatorType)} gebonden is aan de Gedragsregels voor Scheidingsmediators van de vFAS;</li>
         )}
         {data.verschoningsrechtAdvocaat && (
-          <li>Dat de {getMediatorTypeNaam(mediatorType)} als advocaat een wettelijk verschoningsrecht heeft;</li>
+          <li data-field="verschoningsrechtAdvocaat">Dat de {getMediatorTypeNaam(mediatorType)} als advocaat een wettelijk verschoningsrecht heeft;</li>
         )}
       </ul>
 
@@ -216,7 +216,7 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
         <SubArticle number="1.1">
           Deelnemers geven de {getMediatorTypeNaam(mediatorType)} opdracht tot het begeleiden van het mediationproces gericht op het bereiken van een minnelijke regeling van de tussen deelnemers bestaande geschillen.
           {data.kwestieOmschrijving && (
-            <> Nadere omschrijving: {data.kwestieOmschrijving}.</>
+            <span data-field="kwestieOmschrijving"> Nadere omschrijving: {data.kwestieOmschrijving}.</span>
           )}
         </SubArticle>
         {data.vfasGedragsregels && (
@@ -260,7 +260,7 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
                 <li>Er vindt een slotbijeenkomst plaats met monitoringformulieren</li>
                 <li>Verplichtingen blijven bestaan na beëindiging mediation</li>
                 {data.mediationDuur && (
-                  <li>De mediation duurt in beginsel ten hoogste {data.mediationDuur}</li>
+                  <li data-field="mediationDuur">De mediation duurt in beginsel ten hoogste {data.mediationDuur}</li>
                 )}
               </>
             )}
@@ -295,7 +295,7 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
         <SubArticle number="5.1">
           Een tussen deelnemers tot stand gekomen convenant is bindend.
           {data.ouderschapsplanNodig === 'ja' && data.ouderschapsplanBijlage && (
-            <> Het ouderschapsplan vormt een bijlage bij het convenant.</>
+            <span data-field="ouderschapsplanBijlage"> Het ouderschapsplan vormt een bijlage bij het convenant.</span>
           )}
         </SubArticle>
         <SubArticle number="5.2">
@@ -368,37 +368,39 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
           // Voor aspirant en lid
           <>
             <SubArticle number="8.1">
-              Het honorarium van de {getMediatorTypeNaam(mediatorType)} bedraagt € {getValue(data.honorariumBedrag, 'bedrag')} per uur, exclusief {data.honorariumBTW || '21'}% BTW.
+              <span data-field="honorariumBedrag">
+                Het honorarium van de {getMediatorTypeNaam(mediatorType)} bedraagt € {getValue(data.honorariumBedrag, 'bedrag')} per uur, exclusief {data.honorariumBTW || '21'}% BTW.
+              </span>
               {data.reistijdTarief && (
-                <> Het tarief voor reistijd bedraagt € {data.reistijdTarief} per uur.</>
+                <span data-field="reistijdTarief"> Het tarief voor reistijd bedraagt € {data.reistijdTarief} per uur.</span>
               )}
               {data.telefoonOverlegTarief && (
-                <> Het tarief voor telefonisch overleg bedraagt € {data.telefoonOverlegTarief} per uur.</>
+                <span data-field="telefoonOverlegTarief"> Het tarief voor telefonisch overleg bedraagt € {data.telefoonOverlegTarief} per uur.</span>
               )}
               <br /><br />
               Daarnaast komen voor rekening van deelnemers alle bijkomende kosten zoals reis- en verblijfkosten, kopieerkosten, telefoonkosten en kosten van inschakeling van derden.
             </SubArticle>
             <SubArticle number="8.2">
-              De kosten zijn verschuldigd ook indien de mediation voortijdig wordt beëindigd. De {getMediatorTypeNaam(mediatorType)} zal {data.facturatieFrequentie || 'periodiek'} declareren. Betaling dient te geschieden binnen {data.betalingstermijnDagen || '14'} dagen.
+              De kosten zijn verschuldigd ook indien de mediation voortijdig wordt beëindigd. <span data-field="facturatieFrequentie">De {getMediatorTypeNaam(mediatorType)} zal {data.facturatieFrequentie || 'periodiek'} declareren.</span> <span data-field="betalingstermijnDagen">Betaling dient te geschieden binnen {data.betalingstermijnDagen || '14'} dagen.</span>
             </SubArticle>
             <SubArticle number="8.3">
-              Deelnemers zijn hoofdelijk aansprakelijk voor betaling van het honorarium en de kosten. Onderling dragen zij de kosten in de verhouding: {getValue(data.partij1Naam, 'Deelnemer A')} {data.kostenverdelingPartij1 || '50'}%, {getValue(data.partij2Naam, 'Deelnemer B')} {data.kostenverdelingPartij2 || '50'}%.
+              Deelnemers zijn hoofdelijk aansprakelijk voor betaling van het honorarium en de kosten. Onderling dragen zij de kosten in de verhouding: <span data-field="kostenverdelingPartij1">{getValue(data.partij1Naam, 'Deelnemer A')} {data.kostenverdelingPartij1 || '50'}%</span>, <span data-field="kostenverdelingPartij2">{getValue(data.partij2Naam, 'Deelnemer B')} {data.kostenverdelingPartij2 || '50'}%</span>.
             </SubArticle>
           </>
         ) : (
           // Voor familiemediator - ANDERE STRUCTUUR!
           <>
             <SubArticle number="8.1">
-              Het honorarium van de vFAS-advocaat familiemediator bedraagt € {getValue(data.honorariumBedrag, 'bedrag')} per uur inclusief 19% BTW. Dit honorarium omvat alle kosten. Aanvullende afgestemde kosten (zoals tolkenkosten) worden apart in rekening gebracht.
+              <span data-field="honorariumBedrag">Het honorarium van de vFAS-advocaat familiemediator bedraagt € {getValue(data.honorariumBedrag, 'bedrag')} per uur inclusief 19% BTW.</span> Dit honorarium omvat alle kosten. Aanvullende afgestemde kosten (zoals tolkenkosten) worden apart in rekening gebracht.
             </SubArticle>
             <SubArticle number="8.2">
-              De vFAS-advocaat familiemediator kan de contacturen voorafgaande aan ondertekening van deze overeenkomst declareren. De eerste {gratisPeriode} uur zijn gratis.
+              <span data-field="gratisPeriode">De vFAS-advocaat familiemediator kan de contacturen voorafgaande aan ondertekening van deze overeenkomst declareren. De eerste {gratisPeriode} uur zijn gratis.</span>
             </SubArticle>
             <SubArticle number="8.3">
               Indien deelnemers deze overeenkomst niet ondertekenen, komen alle tot dat moment gemaakte kosten voor rekening van de vFAS-advocaat familiemediator.
             </SubArticle>
             <SubArticle number="8.4">
-              Na de eerste {gratisPeriode} uur worden de kosten in rekening gebracht. Deelnemers betalen ieder de helft, tenzij zij een andere verdeling zijn overeengekomen ({getValue(data.partij1Naam, 'Deelnemer A')} {data.kostenverdelingPartij1 || '50'}%, {getValue(data.partij2Naam, 'Deelnemer B')} {data.kostenverdelingPartij2 || '50'}%). Deelnemers ontvangen een urenverantwoording. Ieder draagt zijn eigen kosten (zoals advocaat, accountant).
+              <span data-field="gratisPeriode">Na de eerste {gratisPeriode} uur worden de kosten in rekening gebracht.</span> Deelnemers betalen ieder de helft, tenzij zij een andere verdeling zijn overeengekomen (<span data-field="kostenverdelingPartij1">{getValue(data.partij1Naam, 'Deelnemer A')} {data.kostenverdelingPartij1 || '50'}%</span>, <span data-field="kostenverdelingPartij2">{getValue(data.partij2Naam, 'Deelnemer B')} {data.kostenverdelingPartij2 || '50'}%</span>). Deelnemers ontvangen een urenverantwoording. Ieder draagt zijn eigen kosten (zoals advocaat, accountant).
             </SubArticle>
             <SubArticle number="8.5">
               Mogelijk is een toevoeging van de Raad voor Rechtsbijstand beschikbaar. Zie www.rvr.org voor meer informatie. Voor mediation na rechtspraak: zie www.mediationnaastrechtspraak.nl.
@@ -410,7 +412,7 @@ export const VfasPreview: React.FC<VfasPreviewProps> = ({ data }) => {
       {/* Ondertekening */}
       <div style={{ marginTop: '48px', pageBreakBefore: 'auto' }}>
         <p style={{ marginBottom: '16px' }}>
-          Aldus overeengekomen en in <strong>{data.aantalExemplaren || '3'}-voud</strong> opgemaakt en ondertekend te {getValue(data.ondertekenPlaats, 'plaats')} op {data.ondertekenDatum ? formatDateLong(data.ondertekenDatum) : '[datum]'}.
+          Aldus overeengekomen en in <strong data-field="aantalExemplaren">{data.aantalExemplaren || '3'}-voud</strong> opgemaakt en ondertekend te <span data-field="ondertekenPlaats">{getValue(data.ondertekenPlaats, 'plaats')}</span> op <span data-field="ondertekenDatum">{data.ondertekenDatum ? formatDateLong(data.ondertekenDatum) : '[datum]'}</span>.
         </p>
 
         {/* Handtekening tabel met 3 kolommen */}

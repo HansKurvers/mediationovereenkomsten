@@ -1,12 +1,13 @@
 // ============================================
 // FILE: src/components/FormField.tsx
-// Dynamic form field component
+// Dynamic form field component with auto-scroll preview and focus tracking
 // ============================================
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { TemplateField } from '../types/template.types';
 import { Button } from './ui/button';
+import { usePreviewScroll } from '../hooks/usePreviewScroll';
 
 interface FormFieldProps {
   field: TemplateField;
@@ -16,6 +17,21 @@ interface FormFieldProps {
 }
 
 export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, watch }) => {
+  // Track focus state for preview scrolling
+  const [isFocused, setIsFocused] = useState(false);
+
+  // Get current field value and trigger scroll on change or focus
+  const fieldValue = watch(field.id);
+  usePreviewScroll(field.id, fieldValue, isFocused);
+
+  // Focus handlers
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
   // Check if field should be displayed based on conditional logic
   if (field.conditional) {
     const watchedValue = watch(field.conditional.field);
@@ -67,7 +83,7 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
               // Multi-select dropdown or checkbox group
               const currentMultiValues = Array.isArray(controllerField.value) ? controllerField.value : [];
               return (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }} onFocus={handleFocus} onBlur={handleBlur} tabIndex={-1}>
                   {field.options?.map((option) => {
                     const isChecked = currentMultiValues.includes(option.value);
                     return (
@@ -98,6 +114,8 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
                   {...controllerField}
                   placeholder={field.placeholder}
                   style={baseInputStyle}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               );
 
@@ -107,6 +125,8 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
                   type="date"
                   {...controllerField}
                   style={baseInputStyle}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               );
 
@@ -117,6 +137,8 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
                   {...controllerField}
                   placeholder={field.placeholder}
                   style={baseInputStyle}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               );
 
@@ -127,6 +149,8 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
                   placeholder={field.placeholder}
                   rows={4}
                   style={{ ...baseInputStyle, resize: 'vertical', fontFamily: 'inherit' }}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 />
               );
 
@@ -135,6 +159,8 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
                 <select
                   {...controllerField}
                   style={{ ...baseInputStyle, cursor: 'pointer' }}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
                 >
                   <option value="">-- Selecteer --</option>
                   {field.options?.map((option) => (
@@ -168,7 +194,7 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
                 };
 
                 return (
-                  <div>
+                  <div onFocus={handleFocus} onBlur={handleBlur} tabIndex={-1}>
                     <div style={{ marginBottom: '12px' }}>
                       <Button
                         type="button"
@@ -212,6 +238,8 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
                     type="checkbox"
                     checked={controllerField.value || false}
                     onChange={(e) => controllerField.onChange(e.target.checked)}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     style={{ width: '18px', height: '18px', marginRight: '8px', cursor: 'pointer' }}
                   />
                   <span style={{ fontSize: '14px' }}>{field.label}</span>
@@ -220,7 +248,7 @@ export const FormField: React.FC<FormFieldProps> = ({ field, control, errors, wa
 
             case 'radio':
               return (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }} onFocus={handleFocus} onBlur={handleBlur} tabIndex={-1}>
                   {field.options?.map((option) => (
                     <label key={option.value} style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                       <input

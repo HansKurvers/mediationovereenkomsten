@@ -116,6 +116,7 @@ export const vfasConfig: TemplateConfig = {
     name: 'vFAS',
     fullName: 'vFAS Mediationovereenkomst',
     description: 'Advocaat-mediator overeenkomst volgens vFAS-standaard',
+    details: 'Geschikt voor: echtscheidingen, familierecht, ouderschapsplannen, alimentatie, omgangsregelingen',
     version: '2024.1',
     organization: 'vereniging FAS',
     color: '#8B5CF6', // Purple

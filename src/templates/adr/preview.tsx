@@ -97,29 +97,29 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
       </div>
 
       {/* Mediator */}
-      <div style={{ marginBottom: '24px' }}>
+      <div style={{ marginBottom: '24px' }} data-field="mediatorNaam">
         <p>
-          {getValue(data.mediatorNaam, 'naam mediator')}, ADR-gecertificeerd {rollenTekst}
-          {data.mediatorAdrRegistratie && ` (${data.mediatorAdrRegistratie})`}
+          {getValue(data.mediatorNaam, 'naam mediator')}, ADR-gecertificeerd <span data-field="mediatorRollen">{rollenTekst}</span>
+          {data.mediatorAdrRegistratie && <span data-field="mediatorAdrRegistratie"> ({data.mediatorAdrRegistratie})</span>}
         </p>
       </div>
 
       <p style={{ marginBottom: '24px' }}>en</p>
 
       {/* Deelnemer A */}
-      <div style={{ marginBottom: '16px' }}>
+      <div style={{ marginBottom: '16px' }} data-field="partij1Naam">
         <p>
           <strong>Deelnemer A:</strong> {getValue(data.partij1Naam, 'naam deelnemer A')}
           {data.partij1Type === 'natuurlijk' && data.partij1Geboortedatum && (
-            <>, geboren op {formatDateLong(data.partij1Geboortedatum)}</>
+            <span data-field="partij1Geboortedatum">, geboren op {formatDateLong(data.partij1Geboortedatum)}</span>
           )}
           {data.partij1Type === 'natuurlijk' && data.partij1Geboorteplaats && (
-            <> te {data.partij1Geboorteplaats}</>
+            <span data-field="partij1Geboorteplaats"> te {data.partij1Geboorteplaats}</span>
           )}
-          , {data.partij1Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij1Adres, 'adres')}
+          <span data-field="partij1Adres">, {data.partij1Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij1Adres, 'adres')}</span>
         </p>
         {data.partij1Vertegenwoordiger && (
-          <p style={{ marginLeft: '20px', fontStyle: 'italic' }}>
+          <p style={{ marginLeft: '20px', fontStyle: 'italic' }} data-field="partij1Vertegenwoordiger">
             hier vertegenwoordigd door: {data.partij1Vertegenwoordiger}
           </p>
         )}
@@ -128,19 +128,19 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
       <p style={{ marginBottom: '16px' }}>en</p>
 
       {/* Deelnemer B */}
-      <div style={{ marginBottom: '24px' }}>
+      <div style={{ marginBottom: '24px' }} data-field="partij2Naam">
         <p>
           <strong>Deelnemer B:</strong> {getValue(data.partij2Naam, 'naam deelnemer B')}
           {data.partij2Type === 'natuurlijk' && data.partij2Geboortedatum && (
-            <>, geboren op {formatDateLong(data.partij2Geboortedatum)}</>
+            <span data-field="partij2Geboortedatum">, geboren op {formatDateLong(data.partij2Geboortedatum)}</span>
           )}
           {data.partij2Type === 'natuurlijk' && data.partij2Geboorteplaats && (
-            <> te {data.partij2Geboorteplaats}</>
+            <span data-field="partij2Geboorteplaats"> te {data.partij2Geboorteplaats}</span>
           )}
-          , {data.partij2Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij2Adres, 'adres')}
+          <span data-field="partij2Adres">, {data.partij2Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij2Adres, 'adres')}</span>
         </p>
         {data.partij2Vertegenwoordiger && (
-          <p style={{ marginLeft: '20px', fontStyle: 'italic' }}>
+          <p style={{ marginLeft: '20px', fontStyle: 'italic' }} data-field="partij2Vertegenwoordiger">
             hier vertegenwoordigd door: {data.partij2Vertegenwoordiger}
           </p>
         )}
@@ -152,11 +152,11 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
       <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px', textDecoration: 'underline' }}>
         Artikel 1 – Globale omschrijving van de kwestie
       </h2>
-      <p style={{ marginBottom: '12px', marginLeft: '20px' }}>
+      <p style={{ marginBottom: '12px', marginLeft: '20px' }} data-field="kwestieType">
         Deelnemers trachten samen middels mediation tot overeenstemming en afspraken te komen over de navolgende kwestie: {getKwestieText(data.kwestieType, data.kwestieAndersOmschrijving)}.
       </p>
       {data.kwestieOmschrijving && (
-        <p style={{ marginBottom: '24px', marginLeft: '20px', fontStyle: 'italic' }}>
+        <p style={{ marginBottom: '24px', marginLeft: '20px', fontStyle: 'italic' }} data-field="kwestieOmschrijving">
           Aanvullende toelichting: {data.kwestieOmschrijving}
         </p>
       )}
@@ -165,7 +165,7 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
       <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px', textDecoration: 'underline' }}>
         Artikel 2 – Aanvang mediation
       </h2>
-      <p style={{ marginBottom: '24px', marginLeft: '20px' }}>
+      <p style={{ marginBottom: '24px', marginLeft: '20px' }} data-field="mediationStartdatum">
         De mediation vangt aan op {data.mediationStartdatum ? formatDateLong(data.mediationStartdatum) : '[datum]'}.
       </p>
 
@@ -193,7 +193,7 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
       <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px', textDecoration: 'underline' }}>
         Artikel 4 – ADR-Mediationreglement
       </h2>
-      <p style={{ marginBottom: '24px', marginLeft: '20px' }}>
+      <p style={{ marginBottom: '24px', marginLeft: '20px' }} data-field="adrReglement">
         Deelnemers en de mediator verbinden zich jegens elkaar tot al hetgeen waartoe zij ingevolge het {getReglementNaam(data.adrReglement || 'PD.002')} gehouden zijn. Dit reglement maakt integraal onderdeel uit van deze overeenkomst.
       </p>
 
@@ -227,7 +227,7 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
           <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px', textDecoration: 'underline' }}>
             Artikel 7 – Meldcode huiselijk geweld en kindermishandeling
           </h2>
-          <p style={{ marginBottom: '24px', marginLeft: '20px' }}>
+          <p style={{ marginBottom: '24px', marginLeft: '20px' }} data-field="meldcodeHuiselijkGeweld">
             De mediator is gebonden aan de Meldcode huiselijk geweld en kindermishandeling. Bij signalen van huiselijk geweld of kindermishandeling zal de mediator conform deze meldcode handelen. Dit kan betekenen dat de geheimhouding in bepaalde gevallen doorbroken moet worden in het belang van de veiligheid.
           </p>
         </>
@@ -239,7 +239,7 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
           <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px', textDecoration: 'underline' }}>
             Artikel {data.meldcodeHuiselijkGeweld ? '8' : '7'} – Verbod op opnames
           </h2>
-          <p style={{ marginBottom: '24px', marginLeft: '20px' }}>
+          <p style={{ marginBottom: '24px', marginLeft: '20px' }} data-field="opnameverbod">
             Het is deelnemers niet toegestaan om tijdens de mediation audio- en/of video-opnames te maken, tenzij alle betrokkenen hier vooraf schriftelijk mee hebben ingestemd.
           </p>
         </>
@@ -263,22 +263,22 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
         Artikel {data.meldcodeHuiselijkGeweld && data.opnameverbod ? '10' : data.meldcodeHuiselijkGeweld || data.opnameverbod ? '9' : '8'} – Honoraria en kosten
       </h2>
       <div style={{ marginLeft: '20px' }}>
-        <div style={{ marginBottom: '12px' }}>
+        <div style={{ marginBottom: '12px' }} data-field="honorariumBedrag">
           <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Tarieven:</p>
           <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
             <li>Mediation: {getValue(data.honorariumBedrag, 'bedrag')} euro per uur</li>
             {heeftConflictcoach && data.conflictcoachTarief && (
-              <li>Conflictcoaching: {data.conflictcoachTarief} euro per uur</li>
+              <li data-field="conflictcoachTarief">Conflictcoaching: {data.conflictcoachTarief} euro per uur</li>
             )}
             {heeftNegotiator && data.negotiatorTarief && (
-              <li>Negotiation: {data.negotiatorTarief} euro per uur</li>
+              <li data-field="negotiatorTarief">Negotiation: {data.negotiatorTarief} euro per uur</li>
             )}
           </ul>
           <p>Alle bedragen zijn exclusief {data.honorariumBTW || '21'}% BTW.</p>
         </div>
 
         {data.mediationActiviteiten && data.mediationActiviteiten.length > 0 && (
-          <div style={{ marginBottom: '12px' }}>
+          <div style={{ marginBottom: '12px' }} data-field="mediationActiviteiten">
             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>De vergoeding heeft betrekking op:</p>
             <ul style={{ marginLeft: '20px', marginBottom: '12px' }}>
               {data.mediationActiviteiten.map((activiteit: string) => (
@@ -298,12 +298,12 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
 
         <p style={{ marginBottom: '12px' }}>
           <strong>Kostenverdeling:</strong><br />
-          {getValue(data.partij1Naam, 'Deelnemer A')}: {data.kostenverdelingPartij1 || '50'}%<br />
-          {getValue(data.partij2Naam, 'Deelnemer B')}: {data.kostenverdelingPartij2 || '50'}%
+          <span data-field="kostenverdelingPartij1">{getValue(data.partij1Naam, 'Deelnemer A')}: {data.kostenverdelingPartij1 || '50'}%</span><br />
+          <span data-field="kostenverdelingPartij2">{getValue(data.partij2Naam, 'Deelnemer B')}: {data.kostenverdelingPartij2 || '50'}%</span>
         </p>
 
         <p style={{ marginBottom: '12px' }}>
-          De mediator zal {data.facturatieFrequentie || 'periodiek'} factureren. Betaling geschiedt binnen {data.betalingstermijnDagen || '14'} dagen na factuurdatum.
+          <span data-field="facturatieFrequentie">De mediator zal {data.facturatieFrequentie || 'periodiek'} factureren.</span> <span data-field="betalingstermijnDagen">Betaling geschiedt binnen {data.betalingstermijnDagen || '14'} dagen na factuurdatum.</span>
         </p>
       </div>
 
@@ -313,10 +313,10 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
           <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px', textDecoration: 'underline' }}>
             Artikel {data.meldcodeHuiselijkGeweld && data.opnameverbod ? '11' : data.meldcodeHuiselijkGeweld || data.opnameverbod ? '10' : '9'} – Subsidie en toevoeging
           </h2>
-          <p style={{ marginBottom: '24px', marginLeft: '20px' }}>
+          <p style={{ marginBottom: '24px', marginLeft: '20px' }} data-field="subsidieMogelijk">
             De mediation wordt (gedeeltelijk) gefinancierd via subsidie/toevoeging.
             {data.subsidieBijToevoeging && (
-              <> Het toevoegingsnummer is: <strong>{data.subsidieBijToevoeging}</strong>.</>
+              <span data-field="subsidieBijToevoeging"> Het toevoegingsnummer is: <strong>{data.subsidieBijToevoeging}</strong>.</span>
             )}
           </p>
         </>
@@ -361,7 +361,7 @@ export const AdrPreview: React.FC<AdrPreviewProps> = ({ data }) => {
           } – Ondertekening
         </h2>
         <p style={{ marginBottom: '16px', marginLeft: '20px' }}>
-          Aldus overeengekomen en in <strong>{data.aantalExemplaren || '3'}-voud</strong> opgemaakt en ondertekend te {getValue(data.ondertekenPlaats, 'plaats')} op {data.ondertekenDatum ? formatDateLong(data.ondertekenDatum) : '[datum]'}.
+          Aldus overeengekomen en in <strong data-field="aantalExemplaren">{data.aantalExemplaren || '3'}-voud</strong> opgemaakt en ondertekend te <span data-field="ondertekenPlaats">{getValue(data.ondertekenPlaats, 'plaats')}</span> op <span data-field="ondertekenDatum">{data.ondertekenDatum ? formatDateLong(data.ondertekenDatum) : '[datum]'}</span>.
         </p>
 
         {/* Handtekening tabel met 3 kolommen */}

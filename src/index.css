@@ -69,3 +69,39 @@
     min-height: 100vh;
   }
 }
+
+/* Preview container smooth scrolling */
+.preview-container {
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+/* Improved preview field highlight animation */
+.highlight-field {
+  animation: highlight-pulse 1.5s ease-in-out;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  padding: 4px;
+  margin: -4px;
+}
+
+@keyframes highlight-pulse {
+  0% {
+    background-color: transparent;
+    transform: scale(1);
+  }
+  25% {
+    background-color: rgba(59, 130, 246, 0.15);
+    transform: scale(1.01);
+  }
+  50% {
+    background-color: rgba(59, 130, 246, 0.25);
+  }
+  75% {
+    background-color: rgba(59, 130, 246, 0.15);
+  }
+  100% {
+    background-color: transparent;
+    transform: scale(1);
+  }
+}

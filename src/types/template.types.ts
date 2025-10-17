@@ -13,6 +13,7 @@ export interface TemplateMetadata {
   name: string;
   fullName: string;
   description: string;
+  details?: string; // Extended info for tooltip
   version: string;
   organization: string;
   logo?: string;

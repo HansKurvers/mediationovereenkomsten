@@ -67,29 +67,29 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
       </h1>
 
       {/* Mediator */}
-      <div style={{ marginBottom: '24px' }}>
+      <div style={{ marginBottom: '24px' }} data-field="mediatorNaam">
         <p>
           {getValue(data.mediatorNaam, 'naam mediator')}, MfN-registermediator
-          {data.mediatorMfnRegistratie && ` (${data.mediatorMfnRegistratie})`}
+          {data.mediatorMfnRegistratie && <span data-field="mediatorMfnRegistratie"> ({data.mediatorMfnRegistratie})</span>}
         </p>
       </div>
 
       <p style={{ marginBottom: '24px' }}>en de deelnemers:</p>
 
       {/* Deelnemer 1 */}
-      <div style={{ marginBottom: '16px' }}>
+      <div style={{ marginBottom: '16px' }} data-field="partij1Naam">
         <p>
           <strong>A:</strong> {getValue(data.partij1Naam, 'naam deelnemer 1')}
           {data.partij1Type === 'natuurlijk' && data.partij1Geboortedatum && (
-            <>, geboren op {formatDateLong(data.partij1Geboortedatum)}</>
+            <span data-field="partij1Geboortedatum">, geboren op {formatDateLong(data.partij1Geboortedatum)}</span>
           )}
           {data.partij1Type === 'natuurlijk' && data.partij1Geboorteplaats && (
-            <> te {data.partij1Geboorteplaats}</>
+            <span data-field="partij1Geboorteplaats"> te {data.partij1Geboorteplaats}</span>
           )}
-          , {data.partij1Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij1Adres, 'adres')}
+          <span data-field="partij1Adres">, {data.partij1Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij1Adres, 'adres')}</span>
         </p>
         {data.partij1Vertegenwoordiger && (
-          <p style={{ marginLeft: '20px', fontStyle: 'italic' }}>
+          <p style={{ marginLeft: '20px', fontStyle: 'italic' }} data-field="partij1Vertegenwoordiger">
             hier vertegenwoordigd door: {data.partij1Vertegenwoordiger}
           </p>
         )}
@@ -98,19 +98,19 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
       <p style={{ marginBottom: '16px' }}>en</p>
 
       {/* Deelnemer 2 */}
-      <div style={{ marginBottom: '24px' }}>
+      <div style={{ marginBottom: '24px' }} data-field="partij2Naam">
         <p>
           <strong>B:</strong> {getValue(data.partij2Naam, 'naam deelnemer 2')}
           {data.partij2Type === 'natuurlijk' && data.partij2Geboortedatum && (
-            <>, geboren op {formatDateLong(data.partij2Geboortedatum)}</>
+            <span data-field="partij2Geboortedatum">, geboren op {formatDateLong(data.partij2Geboortedatum)}</span>
           )}
           {data.partij2Type === 'natuurlijk' && data.partij2Geboorteplaats && (
-            <> te {data.partij2Geboorteplaats}</>
+            <span data-field="partij2Geboorteplaats"> te {data.partij2Geboorteplaats}</span>
           )}
-          , {data.partij2Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij2Adres, 'adres')}
+          <span data-field="partij2Adres">, {data.partij2Type === 'natuurlijk' ? 'wonende' : 'gevestigd'} te {getValue(data.partij2Adres, 'adres')}</span>
         </p>
         {data.partij2Vertegenwoordiger && (
-          <p style={{ marginLeft: '20px', fontStyle: 'italic' }}>
+          <p style={{ marginLeft: '20px', fontStyle: 'italic' }} data-field="partij2Vertegenwoordiger">
             hier vertegenwoordigd door: {data.partij2Vertegenwoordiger}
           </p>
         )}
@@ -122,11 +122,11 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
       <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px', marginBottom: '12px' }}>
         1 Globale omschrijving van de kwestie
       </h2>
-      <p style={{ marginBottom: '12px', marginLeft: '20px' }}>
+      <p style={{ marginBottom: '12px', marginLeft: '20px' }} data-field="kwestieType">
         Deelnemers trachten samen middels mediation tot overeenstemming en afspraken te komen over de navolgende kwestie: {getKwestieText(data.kwestieType, data.kwestieAndersOmschrijving)}.
       </p>
       {data.kwestieOmschrijving && (
-        <p style={{ marginBottom: '24px', marginLeft: '20px', fontStyle: 'italic' }}>
+        <p style={{ marginBottom: '24px', marginLeft: '20px', fontStyle: 'italic' }} data-field="kwestieOmschrijving">
           Aanvullende details: {data.kwestieOmschrijving}
         </p>
       )}
@@ -153,7 +153,7 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
         </SubArticle>
 
         <SubArticle number="2.5">
-          De mediation vangt aan op {data.mediationStartdatum ? formatDateLong(data.mediationStartdatum) : '[datum]'}. Vanaf dat moment zijn de bepalingen van het Reglement volledig van toepassing.
+          <span data-field="mediationStartdatum">De mediation vangt aan op {data.mediationStartdatum ? formatDateLong(data.mediationStartdatum) : '[datum]'}. Vanaf dat moment zijn de bepalingen van het Reglement volledig van toepassing.</span>
         </SubArticle>
 
         <SubArticle number="2.6">
@@ -213,10 +213,12 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
       </h2>
       <div style={{ marginLeft: '20px' }}>
         <SubArticle number="7.1">
-          Het honorarium voor de werkzaamheden van de mediator bedraagt {getValue(data.honorariumBedrag, 'bedrag')} euro per uur, vermeerderd met {data.honorariumBTW || '21'}% wettelijk verschuldigde omzetbelasting.
+          <span data-field="honorariumBedrag">
+            Het honorarium voor de werkzaamheden van de mediator bedraagt {getValue(data.honorariumBedrag, 'bedrag')} euro per uur, vermeerderd met {data.honorariumBTW || '21'}% wettelijk verschuldigde omzetbelasting.
+          </span>
 
           {data.mediationActiviteiten && data.mediationActiviteiten.length > 0 && (
-            <>
+            <span data-field="mediationActiviteiten">
               <br /><br />
               De vergoeding heeft betrekking op de volgende werkzaamheden:
               <ul style={{ marginTop: '8px', marginBottom: '8px', paddingLeft: '20px' }}>
@@ -228,14 +230,14 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
                   </li>
                 ))}
               </ul>
-            </>
+            </span>
           )}
 
           {data.activiteitenOnderUurtarief && (
-            <>
+            <span data-field="activiteitenOnderUurtarief">
               <br />
               Overige activiteiten onder het uurtarief: {data.activiteitenOnderUurtarief}.
-            </>
+            </span>
           )}
 
           <br /><br />
@@ -243,8 +245,8 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
         </SubArticle>
 
         <SubArticle number="7.2">
-          Honorarium en kosten bedoeld in punt 7.1 worden door de deelnemers gedragen in de volgende verhouding:<br />
-          {getValue(data.partij1Naam, 'deelnemer 1')}: {data.kostenverdelingPartij1 || '50'}% &nbsp;&nbsp; {getValue(data.partij2Naam, 'deelnemer 2')}: {data.kostenverdelingPartij2 || '50'}%
+          <span data-field="kostenverdelingPartij1">Honorarium en kosten bedoeld in punt 7.1 worden door de deelnemers gedragen in de volgende verhouding:<br />
+          {getValue(data.partij1Naam, 'deelnemer 1')}: {data.kostenverdelingPartij1 || '50'}%</span> &nbsp;&nbsp; <span data-field="kostenverdelingPartij2">{getValue(data.partij2Naam, 'deelnemer 2')}: {data.kostenverdelingPartij2 || '50'}%</span>
         </SubArticle>
 
         <SubArticle number="7.3">
@@ -252,7 +254,7 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
         </SubArticle>
 
         <SubArticle number="7.4">
-          De mediator zal {data.facturatieFrequentie || 'periodiek'} factureren. Betaling geschiedt binnen {data.betalingstermijnDagen || '14'} dagen na factuurdatum.
+          <span data-field="facturatieFrequentie">De mediator zal {data.facturatieFrequentie || 'periodiek'} factureren.</span> <span data-field="betalingstermijnDagen">Betaling geschiedt binnen {data.betalingstermijnDagen || '14'} dagen na factuurdatum.</span>
         </SubArticle>
       </div>
 
@@ -273,7 +275,7 @@ export const MfnPreview: React.FC<MfnPreviewProps> = ({ data }) => {
       {/* Ondertekening */}
       <div style={{ marginTop: '48px', pageBreakBefore: 'auto' }}>
         <p style={{ marginBottom: '16px' }}>
-          Aldus overeengekomen en in <strong>{data.aantalExemplaren || '3'}-voud</strong> opgemaakt en ondertekend te {getValue(data.ondertekenPlaats, 'plaats')} op {data.ondertekenDatum ? formatDateLong(data.ondertekenDatum) : '[datum]'}.
+          Aldus overeengekomen en in <strong data-field="aantalExemplaren">{data.aantalExemplaren || '3'}-voud</strong> opgemaakt en ondertekend te <span data-field="ondertekenPlaats">{getValue(data.ondertekenPlaats, 'plaats')}</span> op <span data-field="ondertekenDatum">{data.ondertekenDatum ? formatDateLong(data.ondertekenDatum) : '[datum]'}</span>.
         </p>
 
         {/* Handtekening tabel met 3 kolommen */}
